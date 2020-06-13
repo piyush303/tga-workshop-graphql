@@ -1,51 +1,51 @@
-const {gql} = require('apollo-server');
+const { gql } = require('apollo-server');
 
 const typeDefs = gql`
-    type Query {
-        users: [User]
-        products: [Product!]!
-        product(_id: String): Product
-    }
+  type Query {
+    customers: [Customer]
+    customer(id: ID): Customer
+    products: [Product!]!
+    product(_id: String): Product
+  }
 
-    type Mutation {
-        registerUser(user: UserInput): User,
-        login(user: LoginInput): String
-        addProduct(product: ProductInput): Product
-    }
+  type Mutation {
+    registerCustomer(customer: CustomerInput): Customer
+    login(customer: LoginInput): String
+    addProduct(product: ProductInput): Product
+  }
 
-    
+  input CustomerInput {
+    name: String
+    password: String
+    address: String
+    email: String
+  }
 
-    input UserInput {
-        name: String
-        age: Int
-        password: String
-        email: String
-    }
+  input LoginInput {
+    email: String
+    password: String
+  }
 
-    input LoginInput {
-        email: String
-        password: String
-    }
+  
+  type Customer {
+    id: ID
+    name: String
+    email: String
+    address: String
+  }
 
-    input ProductInput {
-      name: String
-      category: String
-      price: Float!
-    }
+  input ProductInput {
+    name: String
+    category: String
+    price: Float!
+  }
 
-    type User {
-        id: ID
-        name: String
-        email: String
-        age: Int
-    }
-
-    type Product {
-      id: ID!
-      name: String
-      category: String
-      price: Float!
-    }
+  type Product {
+    id: ID!
+    name: String
+    category: String
+    price: Float!
+  }
 `;
 
-module.exports =typeDefs;
+module.exports = typeDefs;
