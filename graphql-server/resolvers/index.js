@@ -1,4 +1,6 @@
-const {registerUser, fetchUsers, login} = require('../users')
+const {registerUser, fetchUsers, login} = require('../users');
+const { getProducts, getProductById, addNewProduct } = require('../products');
+
 const resolvers = {
     Query: {
         users: (parent, args, context) => {
@@ -7,6 +9,16 @@ const resolvers = {
             
           const users =   fetchUsers();
           return users;
+        },
+
+        products: async (parent, args) => {
+          const products = await getProducts();
+          return products;
+        },
+
+        product: async (parent, args) => {
+          const product = await getProductById(args._id);
+          return product;
         }
     },
     Mutation: {
@@ -17,6 +29,12 @@ const resolvers = {
         login: async (parent, args) => {
             const token = await login(args.user);
             return token;
+        },
+
+        addProduct: async (parent, args) => {
+          // console.log('dsaadas', args);
+          const product = await addNewProduct(args.product);
+          return product;
         }
     },
     
