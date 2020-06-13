@@ -45,9 +45,7 @@ const fetchCustomers = async () => {
 
 const fetchCustomerById = async (id) => {
   try {
-    const { data } = await instance.get('/customers', {
-      id,
-    });
+    const { data } = await instance.get(`/customers/${id}`);
     return data;
   } catch (e) {
     console.error('---error fetching customer--', e);
