@@ -11,14 +11,14 @@ const createToken = async (customer) => {
 };
 
 const registerCustomer = async (req, res) => {
-  const { name, email, password, age } = req.body;
+  const { name, email, password, address } = req.body;
   try {
     // mongoose model
     const newCustomer = new Customer({
       name,
       email,
       password,
-      age,
+      address,
     });
 
     const customer = await newCustomer.save();
